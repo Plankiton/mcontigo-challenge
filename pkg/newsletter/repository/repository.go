@@ -1,12 +1,9 @@
 package repository
 
 import (
-	"encoding/json"
-	"fmt"
 	"sync"
 
 	newsletter "git.mcontigo.com/safeplay/newsletter-api/pkg/newsletter"
-	"github.com/google/uuid"
 )
 
 var (
@@ -23,16 +20,13 @@ type Option func(*repository) error
 func New(opts ...Option) (newsletter.Repository, error) {
 	r := &repository{
 		data: []*subscriptionDBModel{
-			{
-				UserID:    uuid.NewString(),
-				BlogID:    uuid.NewString(),
-				Interests: []string{string(newsletter.InterestPolitics)},
-			},
+			// {
+			// 	UserID:    uuid.NewString(),
+			// 	BlogID:    uuid.NewString(),
+			// 	Interests: []string{string(newsletter.InterestPolitics)},
+			// },
 		},
 	}
-
-	rJson, _ := json.MarshalIndent(r.data, "", "  ")
-	fmt.Println(string(rJson))
 
 	for _, opt := range opts {
 		if err := opt(r); err != nil {

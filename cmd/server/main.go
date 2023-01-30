@@ -21,6 +21,8 @@ func main() {
 	newsletterHandler := handler.Build()
 	newsLetterGroup := r.Group("/newsletter")
 	newsLetterGroup.GET("/subscriptions", newsletterHandler.Get)
+	newsLetterGroup.POST("/subscription", newsletterHandler.Post)
+
 	port, ok := os.LookupEnv("PORT")
 	if !ok {
 		port = "8000"

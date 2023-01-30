@@ -25,3 +25,6 @@ vendor
 .idea
 
 docs/swagger.yaml
+tmp
+docs
+wire_gen.go

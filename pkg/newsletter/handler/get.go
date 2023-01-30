@@ -10,8 +10,7 @@ import (
 	"github.com/google/uuid"
 )
 
-// nolint:lll // godoc
-// Get godoc
+// Get defines GET /newsletter/subscriptions endpoint
 // @Summary      Read subscriptions
 // @Tags         subscriptions
 // @Router       /newsletter/subscriptions [get]

@@ -15,4 +15,8 @@ type Service interface {
 		Page int,
 		MaxPageSize int,
 	) (*Result[*Subscription], error)
+	Post(
+		ctx context.Context,
+		sub Subscription,
+	) error
 }
