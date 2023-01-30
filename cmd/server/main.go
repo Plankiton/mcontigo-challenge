@@ -6,22 +6,21 @@ import (
 	"git.mcontigo.com/safeplay/newsletter-api/pkg/cors"
 	"git.mcontigo.com/safeplay/newsletter-api/pkg/newsletter/handler"
 	"github.com/gin-gonic/gin"
+
+	_ "git.mcontigo.com/safeplay/newsletter-api/docs"
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// @contact.name                Grupo MContigo
-// @title                       Newsletter API
-// @version                     1.0
-// @description                 Newsletter API
 func main() {
 	r := gin.Default()
 
 	r.Use(cors.AllowCORS())
+	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	newsletterHandler := handler.Build()
-
 	newsLetterGroup := r.Group("/newsletter")
-	newsLetterGroup.GET("/subscription", newsletterHandler.Get)
-
+	newsLetterGroup.GET("/subscriptions", newsletterHandler.Get)
 	port, ok := os.LookupEnv("PORT")
 	if !ok {
 		port = "8000"

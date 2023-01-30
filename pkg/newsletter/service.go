@@ -12,5 +12,7 @@ type Service interface {
 		UserID uuid.UUID,
 		BlogID uuid.UUID,
 		Interests []Interest,
+		Page int,
+		MaxPageSize int,
 	) (*Result[*Subscription], error)
 }

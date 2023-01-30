@@ -8,6 +8,10 @@ type handler struct {
 	svc newsletter.Service
 }
 
+// @contact.name                Grupo MContigo
+// @title                       Newsletter API
+// @version                     1.0
+// @description                 Newsletter API
 func New(opts ...Option) (newsletter.Handler, error) {
 	h := &handler{}
 

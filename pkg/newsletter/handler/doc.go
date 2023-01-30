@@ -1,5 +1,7 @@
 package handler
 
+import "git.mcontigo.com/safeplay/newsletter-api/pkg/newsletter"
+
 type ResponseDoc struct {
 	Filter     *FilterDoc     `json:"filter"`
 	Pagination *PaginationDoc `json:"pagination"`
@@ -7,16 +9,16 @@ type ResponseDoc struct {
 }
 
 type FilterDoc struct {
-	UserID    string   `json:"userId" example:"e020e7f8-79e6-4d16-80ce-7cbf86cefe1f"`
-	BlogID    string   `json:"blogId" example:"b4f2e2d9-e399-46d0-a458-ef75527896c1"`
-	Interests []string `json:"interests" example:"tech,sports"`
+	UserID    string                `json:"userId" example:"e020e7f8-79e6-4d16-80ce-7cbf86cefe1f"`
+	BlogID    string                `json:"blogId" example:"b4f2e2d9-e399-46d0-a458-ef75527896c1"`
+	Interests []newsletter.Interest `json:"interests" example:"tech,sports"`
 }
 
 //nolint:lll // Long documentation lines
 type ResultsDoc struct {
-	UserID    string   `json:"userId" example:"e020e7f8-79e6-4d16-80ce-7cbf86cefe1f"`
-	BlogID    string   `json:"blogId" example:"b4f2e2d9-e399-46d0-a458-ef75527896c1"`
-	Interests []string `json:"interests" example:"tech,sports"`
+	UserID    string                `json:"userId" example:"e020e7f8-79e6-4d16-80ce-7cbf86cefe1f"`
+	BlogID    string                `json:"blogId" example:"b4f2e2d9-e399-46d0-a458-ef75527896c1"`
+	Interests []newsletter.Interest `json:"interests" example:"tech,sports"`
 }
 
 type PaginationDoc struct {

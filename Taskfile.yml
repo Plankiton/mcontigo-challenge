@@ -13,7 +13,7 @@ tasks:
       - gofumpt -w .
   docs:
     cmds:
-      - swag init -g cmd/server/main.go --outputTypes yaml --output docs
+      - swag init -g handler.go --dir ./pkg/newsletter/handler/ --output docs --parseDependency
   install:
     cmds:
       - go mod vendor
