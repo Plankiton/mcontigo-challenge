@@ -1,6 +1,12 @@
 package repository
 
-import newsletter "git.mcontigo.com/safeplay/newsletter-api/pkg/newsletter"
+import (
+	"context"
+	"encoding/json"
+	"fmt"
+
+	newsletter "git.mcontigo.com/safeplay/newsletter-api/pkg/newsletter"
+)
 
 func parseInterests(interests []string) []newsletter.Interest {
 	var parsed []newsletter.Interest
@@ -32,4 +38,9 @@ func isSourceHavingSomeOfInterest(searchInterestQuery []newsletter.Interest, sou
 	}
 
 	return false
+}
+
+func (r *repository) PrintData(ctx context.Context) {
+	dataJSON, _ := json.Marshal(r.data)
+	fmt.Printf("Repository Raw Data: %s\n", string(dataJSON))
 }

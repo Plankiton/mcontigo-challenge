@@ -17,13 +17,18 @@ func (s *service) Get(
 ) (*newsletter.Result[*newsletter.Subscription], error) {
 	offset := MaxPageSize * (Page - 1)
 	elements, _ := s.repo.Search(ctx, UserID, BlogID, Interests, offset, MaxPageSize)
+	println(len(elements))
 
 	return &newsletter.Result[*newsletter.Subscription]{
-		Total: 1,
-		Pages: 1,
+		Total: s.repo.Count(ctx),
+		Pages: s.repo.Count(ctx) / MaxPageSize,
 		Page: newsletter.Page[*newsletter.Subscription]{
-			Number:   1,
+			Number:   Page,
 			Elements: elements,
 		},
 	}, nil
+}
+
+func (s *service) PrintData(ctx context.Context) {
+	s.repo.PrintData(ctx)
 }

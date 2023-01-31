@@ -13,7 +13,7 @@ var (
 )
 
 type Subscription struct {
-	UserID    uuid.UUID
-	BlogID    uuid.UUID
-	Interests []Interest
+	UserID    uuid.UUID  `json:"userId"`
+	BlogID    uuid.UUID  `json:"blogId"`
+	Interests []Interest `json:"interests"`
 }

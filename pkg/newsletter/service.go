@@ -19,4 +19,5 @@ type Service interface {
 		ctx context.Context,
 		sub Subscription,
 	) error
+	PrintData(ctx context.Context)
 }

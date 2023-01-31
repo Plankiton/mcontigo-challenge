@@ -18,6 +18,10 @@ import (
 // @Success      200  null
 // nolint:gocyclo //error checking branches
 func (h *handler) Post(c *gin.Context) {
+	if c.Request.Header.Get("Content-Type") == "" {
+		c.Request.Header.Add("Content-Type", "application/json")
+	}
+
 	ctx := c.Request.Context()
 
 	var subscription newsletter.Subscription
@@ -25,4 +29,6 @@ func (h *handler) Post(c *gin.Context) {
 
 	h.svc.Post(ctx, subscription)
 	c.JSON(200, nil)
+
+	h.svc.PrintData(ctx)
 }

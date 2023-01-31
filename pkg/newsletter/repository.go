@@ -19,4 +19,10 @@ type Repository interface {
 		ctx context.Context,
 		sub Subscription,
 	) error
+	Count(
+		ctx context.Context,
+	) int
+	PrintData(
+		ctx context.Context,
+	)
 }

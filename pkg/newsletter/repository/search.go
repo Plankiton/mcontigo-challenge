@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"fmt"
 
 	"git.mcontigo.com/safeplay/newsletter-api/pkg/newsletter"
 	uuid "github.com/google/uuid"
@@ -12,12 +13,21 @@ func (r *repository) Search(
 	userID uuid.UUID,
 	blogID uuid.UUID,
 	interests []newsletter.Interest,
-	limit int,
 	offset int,
+	limit int,
 ) ([]*newsletter.Subscription, error) {
-	var subs []*newsletter.Subscription
+	subs := make([]*newsletter.Subscription, 0)
 
-	for _, d := range r.data {
+	fmt.Println(len(r.data), offset, limit)
+	if len(r.data) < offset {
+		return subs, nil
+	}
+
+	for i, d := range r.data[offset:] {
+		if i == offset+limit {
+			break
+		}
+
 		repoInterests := parseInterests(d.Interests)
 
 		if d.BlogID == blogID.String() || d.UserID == userID.String() || isSourceHavingSomeOfInterest(interests, repoInterests) {
@@ -30,4 +40,10 @@ func (r *repository) Search(
 	}
 
 	return subs, nil
+}
+
+func (r *repository) Count(
+	ctx context.Context,
+) int {
+	return len(r.data)
 }
