@@ -15,7 +15,7 @@ import (
 // @Param        blogId	        query  string	 false  "Blog ID"                                        example(6d52cf12-84c0-4d6b-a3a1-cf6350362590)
 // @Param        interests	    query  []string  false  "Interests"                                      example(["tech","sports"])
 // @Produce      json
-// @Success      200  null
+// @Success      200
 // nolint:gocyclo //error checking branches
 func (h *handler) Post(c *gin.Context) {
 	if c.Request.Header.Get("Content-Type") == "" {
@@ -28,7 +28,7 @@ func (h *handler) Post(c *gin.Context) {
 	c.Bind(&subscription)
 
 	h.svc.Post(ctx, subscription)
-	c.JSON(200, nil)
+	c.String(200, "{\"success\":true}")
 
 	h.svc.PrintData(ctx)
 }
